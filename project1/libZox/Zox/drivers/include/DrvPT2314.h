@@ -1,0 +1,69 @@
+/*
+ * RoadPassion CONFIDENTIAL
+ *
+ * Copyright 2013 RoadPassion Electronics Co., Ltd.
+ *
+ * DO NOT COPY AND/OR REDISTRIBUTE WITHOUT PERMISSION.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+#ifndef DRVPT2314_H_
+#define DRVPT2314_H_
+
+#include <Driver.h>
+#include "stm32f10x.h"
+#include <DrvI2CCom.h>
+#include <libcommon.h>
+
+#define PT2314_ADDR 0x88
+
+#define SET_MASTER_VOL_0DB 0x00 //
+#define SET_SPEAKER_L_0DB  0xc0 //
+#define SET_SPEAKER_R_0DB  0xe0 //
+#define SET_BASS_0DB       0x67 //
+#define SET_TREBLE_0DB     0xc0 //
+
+#define SET_SPEAKER_L_MUTE 0xdf //
+#define SET_SPEAKER_R_MUTE 0xff //
+
+
+class DrvPT2314 : public Driver {
+public:
+	DrvPT2314(DrvI2CCom **pDrvI2C=NULL);
+	~DrvPT2314(void);
+
+	enum {
+		GAIN_LEVEL_4=0,		// +11.25dB, Bit4-Bit3:00
+		GAIN_LEVEL_3,		// +7.5dB,   Bit4-Bit3:01
+		GAIN_LEVEL_2,		// +3.75dB,  Bit4-Bit3:10
+		GAIN_LEVEL_1,		// +0dB,     Bit4-Bit3:11
+	};
+
+	/* “Ù∆µÕ®µ¿ */
+	enum {
+		AIN1 = 0,
+		AIN2,
+		AIN3,
+		AIN4,
+	};
+
+	int init(void);
+	void read(uint8_t addr, uint16_t *pBuf);
+	void write(uint8_t val);	
+	void setAudioChannelAndGain(uint8_t channel, uint8_t gainLevel = 0x03);
+private:
+	DrvI2CCom **_pDrvI2C;
+};
+
+
+#endif /* DRVPT2314_H_ */

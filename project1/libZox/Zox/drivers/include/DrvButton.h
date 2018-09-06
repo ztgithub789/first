@@ -1,0 +1,49 @@
+/*
+ * RoadPassion CONFIDENTIAL
+ *
+ * Copyright 2013 RoadPassion Electronics Co., Ltd.
+ *
+ * DO NOT COPY AND/OR REDISTRIBUTE WITHOUT PERMISSION.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+#ifndef DRVBUTTON_H_
+#define DRVBUTTON_H_
+
+#include "Driver.h"
+
+// 定义存在冗余。为了简单暂时不管。
+struct ResButton {
+	GPIO_TypeDef	*GPIO_Port;			// GPIO口
+	uint16_t		GPIO_Pin;			// PIN号
+	uint32_t		RCC_APB2Periph;		// RCC外设号
+	uint8_t			EXTI_GPIO_PortSource;	// 外部中断GPIO口
+	uint8_t			EXIT_GPIO_PinSource;	// 外部中断GPIO PIN号
+	uint32_t		EXTI_Line;				// 外部中断线
+	uint8_t			EXIT_NVIC_IRQChannel;	// 外部中断号
+};
+
+class DrvButton : public Driver {
+public:
+	typedef void (*PushCB_T)(void*);
+	DrvButton(ResButton *res);
+	virtual ~DrvButton();
+	int init(void);
+	static void irqVectorCB(void);
+
+private:
+	static ResButton *_res;
+	static void timercb(void *);
+};
+
+#endif /* DRVBUTTON_H_ */

@@ -1,0 +1,58 @@
+/*
+ * RoadPassion CONFIDENTIAL
+ *
+ * Copyright 2013 RoadPassion Electronics Co., Ltd.
+ *
+ * DO NOT COPY AND/OR REDISTRIBUTE WITHOUT PERMISSION.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+#ifndef DRVWM8775_H_
+#define DRVWM8775_H_
+
+//#include <libcommon.h>
+#include <Driver.h>
+#include <libcommon.h>
+#include "stm32f10x.h"
+#include "DrVI2CCom.h"
+
+#define WM8775_ADDR_HIGH 0x36
+#define WM8775_ADDR_LOW 0x34
+#define WM8775_REG_AMX 0x15
+#define WM8775_REG_RESET 0x17
+
+class DrvWM8775 : public Driver {
+public:
+	enum {
+		AIN1 = 0x01,
+		AIN2 = 0x02,
+		AIN3 = 0x04,
+		AIN4 = 0x08,
+	};
+
+	DrvWM8775(bool CEPinHigh=false,DrvI2CCom **pDrvI2C=NULL);
+	~DrvWM8775(void);
+	int init(void);
+	void read(uint8_t addr, uint16_t *pBuf);
+	void write(uint8_t addr, uint16_t val);
+	void setAudioAllIn(void);
+	void setAudioNoneIn(void);
+	void setAudioChannel(uint8_t channel);
+
+private:
+	char _addr;
+	DrvI2CCom **_pDrvI2C;
+};
+
+
+#endif /* DRVWM8775_H_ */

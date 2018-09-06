@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\app\projects\CAN-Emulator\CAN-Emulator.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\app\projects\CCEmulator\CCEmulator.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\app\projects\CCEmulator_C02\CCEmulator_C02.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\app\projects\CCEmulator_VW\CCEmulator_VW.ewp</path>
+  </project>
+  <batchBuild/>
+</workspace>
+
+

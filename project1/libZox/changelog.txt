@@ -1,0 +1,87 @@
+== v0.1.8 ==
+- 20180827
+- disable NART for DrvCAN
+- enable low baudrate for DrvI2C
+
+== v0.1.7 ==
+- 20170313
+- add 33K baudrate for DrvCAN
+
+== v0.1.6 ==
+- 20161216
+- change the default value for func DrvTJA1041::enterGotoSleepCommandMode
+
+== v0.1.5 ==
+- 20161216
+- add param named needHold for DrvTJA1041
+
+== v0.1.4 ==
+- 20160601
+- attach DrvTW8835, Drv7026, DrvTW8775, DrvPT2314 to I2CCom
+
+== v0.1.3 ==
+- 20160531
+- add I2C2
+
+== v0.1.2 ==
+- 20151111
+- make spi clock lower for AMI
+
+== v0.1.1 ==
+- 20150714
+- Disable FontOSD win0 when DownloadFontByDMA
+
+== v0.1.0 ==
+- 20150709
+- change i2c with time out detecting
+- change tw8835 with detechTw8835 fun 
+
+== v0.0.11 ==
+- 20150525
+- add a member value named enterNomalAtInit for DrvTJA1041 to decide entering nomal mode or the pwon mode 
+
+== v0.0.10 ==
+- 20150523
+- define GPIO_Pin=(uint16_t)-1 meaning the current pin never works  
+
+== v0.0.9 ==
+- 20150316 
+- fix i2c bug
+
+== v0.0.8 ==
+- 20150305
+- Delete Timer
+
+== v0.0.7 ==
+- 20150108
+- Enable OS_MUTEX
+
+== v0.0.6 ==
+- 20141127
+- add DrvFs
+
+== v0.0.5 ==
+- 20141111
+- add clockSetting for DrvI2C  
+== v0.0.4 ==
+- 20141110
+- MD_LIB: use MD irq file
+== v0.0.3 ==
+- 20141107
+- add:
+ - DrvCan: resizeRingBuffer
+ - DrvTw8835: setLowCLK
+ - DrvUSART: defConfigure
+
+== v0.0.2 ==
+- 20141027
+- CAN动态缓冲器
+
+== v0.0.1 ==
+- 20140927
+- 第一版本库，包括CL版和MD版
+- bug:
+ - 头文件管理可能会与App层的有冲突
+- TODO:
+ - 版本号与头文件的使用
+

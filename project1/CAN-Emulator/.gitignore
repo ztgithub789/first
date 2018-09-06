@@ -1,0 +1,43 @@
+# ignore files list
+
+# object files
+*.log
+*.o
+*.pbi
+*.lst
+*.out
+*.r79
+
+# binary files
+*.bin
+
+# project files
+*.cspy.bat
+*.wsdt
+
+# files under settings folder
+*.map
+*.pbd
+*.dni
+*.dbgdt
+
+# tmp files
+*~
+*.tmp
+
+*.sim
+.cproject
+.project
+
+*.log
+~*
+Debug
+.settings
+*.dep
+*.jlink
+Makefile*
+*.pro.user
+
+doxygen
+.pydevproject
+courbet-build-desktop-Qt_4_8_1_for_Desktop_-_MinGW__Qt_SDK____

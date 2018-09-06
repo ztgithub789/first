@@ -1,0 +1,49 @@
+/*
+ * RoadPassion CONFIDENTIAL
+ *
+ * Copyright 2013 RoadPassion Electronics Co., Ltd.
+ *
+ * DO NOT COPY AND/OR REDISTRIBUTE WITHOUT PERMISSION.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+#ifndef DRVLED_H_
+#define DRVLED_H_
+
+#include "stm32f10x.h"
+#include "Driver.h"
+
+struct ResLED {
+	uint32_t		RCC_APB2Periph;		// RCC外设号
+	GPIO_TypeDef	*GPIO_Port;			// GPIO口
+	uint16_t		GPIO_Pin;			// PIN号
+};
+
+
+class DrvLED: public Driver {
+public:
+	DrvLED(ResLED *pRes, bool activeLevel = true);
+	virtual ~DrvLED();
+	int init(void);
+	void setActiveLevel(bool l);
+	void on(void);
+	void off(void);
+	bool getValue(void);
+	void toggle(void);
+private:
+	ResLED *_pRes;
+	bool	_activeLevel;	// true:  高电平有效
+							// false: 低电平有效
+};
+
+#endif /* DRVLED_H_ */
